@@ -1,33 +1,32 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\PembayaranController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\DashboardController;
 
-Route::get('/login', function () {
-    return view('admin.login');
-});
+Route::get('/login',    [UserController::class, 'loginForm'])->name('login');
+Route::post('/login',   [UserController::class, 'login'])->name('login.attempt');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/register', [UserController::class, 'registerForm'])->name('register');
+Route::post('/register',[UserController::class, 'register'])->name('register.submit');
+
+Route::post('/logout',  [UserController::class, 'logout'])->name('logout');
 
 
-Route::get('/data', function () {
-    return view('data.data');
-});
+Route::resource('siswa', SiswaController::class);
 
-Route::get('/tambahdata', function () {
-    return view('data.tambah');
-});
+Route::resource('pembayaran', PembayaranController::class);
 
-Route::get('/pembayaran', function () {
-    return view('pembayaran.pembayaran');
-});
+Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+Route::get('/laporan/export/pdf',   [LaporanController::class, 'exportPdf'])->name('export.pdf');
+Route::get('/laporan/export/excel', [LaporanController::class, 'exportExcel'])->name('export.excel');
 
-Route::get('/tambahpembayaran', function () {
-    return view('pembayaran.tambah');
-});
+Route::get('/', [DashboardController::class, 'index'])->name('home');
 
-Route::get('/laporan', function () {
-    return view('laporan');
-});
+
+
+
 
