@@ -30,8 +30,20 @@
         <div class="flex items-start justify-between">
           <h1 class="text-3xl font-semibold tracking-tight">Data Siswa</h1>
           <div class="flex items-center gap-3">
-            <span class="text-gray-600">Bendahara</span>
-            <span class="inline-block h-10 w-10 rounded-full bg-blue-200"></span>
+            <span class="text-gray-600">
+              {{ Auth::user()->nama ?? 'Guest' }}
+            </span>
+
+            {{-- Tombol logout --}}
+            <form method="POST" action="{{ route('logout') }}">
+              @csrf
+              <button type="submit"
+                class="rounded-md bg-red-500 px-3 py-1 text-white text-sm hover:bg-red-600">
+                Logout
+              </button>
+            </form>
+
+            <span class="h-10 w-10 rounded-full bg-blue-200 inline-block"></span>
           </div>
         </div>
 

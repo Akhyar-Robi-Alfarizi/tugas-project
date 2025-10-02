@@ -29,6 +29,15 @@ $idle = 'block -mx-6 px-6 py-3 hover:bg-[#A4D4E8] hover:text-black';
         </a>
       </li>
 
+      {{-- Kelola User --}}
+      <li>
+        <a href=""
+          class="{{ request()->routeIs('user.*') ? $active : $idle }}"
+          @if(request()->routeIs('user.*')) aria-current="page" @endif>
+          Kelola User
+        </a>
+      </li>
+
       {{-- Laporan --}}
       <li>
         <a href="{{ route('laporan') }}"

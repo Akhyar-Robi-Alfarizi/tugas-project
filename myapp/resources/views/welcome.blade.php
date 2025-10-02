@@ -24,7 +24,7 @@
           <h1 class="text-3xl font-semibold tracking-tight">Pembayaran Uang Kas Kelas</h1>
           <div class="flex items-center gap-3">
             <span class="text-gray-600">
-              {{ Auth::user()->name ?? 'Guest' }}
+              {{ Auth::user()->nama ?? 'Guest' }}
             </span>
 
             {{-- Tombol logout --}}
@@ -100,40 +100,35 @@
     </div>
   </div>
 
-  {{-- Chart.js CDN (ringan dan cepat) --}}
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const labels = {
-      !!Illuminate\ Support\ Js::from($monthLabels ?? []) !!
-    };
-    const totals = {
-      !!Illuminate\ Support\ Js::from($monthTotals ?? []) !!
-    };
+<script>
+  // Embed data dari PHP ke JS
+  const labels = @json($monthLabels ?? []);
+  const totals = @json($monthTotals ?? []);
 
-    const ctx = document.getElementById('monthlyChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels,
-        datasets: [{
-          data: totals,
-          borderWidth: 1
-        }]
-      },
-      options: {
-        plugins: {
-          legend: {
-            display: false
-          }
-        },
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  </script>
+  // (opsional) cek di console kalau masih kosong
+  console.log('labels:', labels, 'totals:', totals);
+
+  const ctx = document.getElementById('monthlyChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [{
+        data: totals,
+        // tambahkan warna agar jelas terlihat
+        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+</script>
+
 
 </body>
 
