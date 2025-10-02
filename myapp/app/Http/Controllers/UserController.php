@@ -24,7 +24,7 @@ class UserController extends Controller
 
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            return redirect()->intended('/'); // ganti ke route tujuanmu
+            return redirect()->intended('/dashboard'); // ganti ke route tujuanmu
         }
 
         return back()->withErrors([
@@ -45,13 +45,13 @@ class UserController extends Controller
             'nama'     => $data['nama'],
             'email'    => $data['email'] ?? null,
             'password' => Hash::make($data['password']),
-            'role'     => 'siswa',
+            'role'     => 'bendahara',
         ]);
 
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->intended('/'); // ganti ke route tujuanmu
+        return redirect()->intended('/dashboard'); // ganti ke route tujuanmu
     }
 
     // ACTION: LOGOUT
