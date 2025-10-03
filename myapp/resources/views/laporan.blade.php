@@ -22,8 +22,9 @@
       <div class="flex items-start justify-between">
         <h1 class="text-3xl font-semibold tracking-tight">Laporan</h1>
         <div class="flex items-center gap-3">
-          <span class="text-gray-600">
+        <span class="text-gray-600">
             {{ Auth::user()->nama ?? 'Guest' }}
+            @auth <span class="ml-1 text-gray-500">({{ ucfirst(Auth::user()->role) }})</span> @endauth
           </span>
 
           {{-- Tombol logout --}}
@@ -41,11 +42,11 @@
 
       {{-- Tombol ekspor (placeholder route) --}}
       <div class="mt-6 flex gap-3">
-        <a href="{{ route('export.pdf') }}"
+        <a href="{{ route('laporan.export.pdf') }}"
           class="inline-flex items-center rounded-md bg-[#4B78AF] px-4 py-2 text-white shadow hover:bg-[#405875]">
           Export PDF
         </a>
-        <a href="{{ route('export.excel') }}"
+        <a href="{{ route('laporan.export.excel') }}"
           class="inline-flex items-center rounded-md bg-[#4B78AF] px-4 py-2 text-white shadow hover:bg-[#405875]">
           Export Excel
         </a>

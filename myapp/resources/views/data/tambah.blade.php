@@ -33,8 +33,9 @@
             <span class="text-gray-600">Bendahara</span>
             <div class="flex items-center gap-3">
             <span class="text-gray-600">
-              {{ Auth::user()->nama ?? 'Guest' }}
-            </span>
+            {{ Auth::user()->nama ?? 'Guest' }}
+            @auth <span class="ml-1 text-gray-500">({{ ucfirst(Auth::user()->role) }})</span> @endauth
+          </span>
 
             {{-- Tombol logout --}}
             <form method="POST" action="{{ route('logout') }}">
